@@ -7,7 +7,7 @@
     sg_id: sg-0dbaf5aed02fed09e
     env: dev
     domain: prashum.online
-    action: create
+    actions: create
     instances:
     - mongodb
     - catalogue
@@ -27,13 +27,13 @@
         Name: "{{ item }}-{{ env }}" 
     loop: "{{ instances }}"
     register: ec2_output
-    when: action == "create"
+    when: actions == "create"
   
 
   - name: print output
     ansible.builtin.debug:
       msg: "{{ ec2_output }}"
-    when: action == "create"
+    when: actions == "create"
   
 
   - name: create r53 records
@@ -46,7 +46,7 @@
       value: "{{ item.instance[0].private_ip_address }}"     
       wait: true
     loop: "{{ ec2_output.results }}"
-    when: action == "create"
+    when: actions == "create"
 
   - name: create r53 records
     amazon.aws.route53:
@@ -60,7 +60,7 @@
     loop: "{{ ec2_output.results }}"
     when: 
     - item.item == "frontend"
-    - action == "create"
+    - actions == "create"
 
   - name: delete r53 records
     amazon.aws.route53:
@@ -70,11 +70,11 @@
       type: A
       ttl: 1
     loop: "{{ instances }}"
-    when: action == "destroy"
+    when: actions == "destroy"
 
   - name: delete ec2 instance
     amazon.aws.ec2_instance:
       state: absent
       name: "{{ item }}-{{ env }}"
     loop: "{{ instances }}"
-    when: action == "destroy"
+    when: actions == "destroy"
