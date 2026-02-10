@@ -12,7 +12,7 @@
     - catalogue
   
   tasks:
-  - name: Create EC2 instance with termination protection turned on
+  - name: Create EC2 instance
     amazon.aws.ec2_instance:
       name: "{{ item }}-{{ env }}"
       instance_type: t3.micro
