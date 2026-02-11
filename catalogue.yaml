@@ -75,10 +75,9 @@
     ansible.builtin.shell: mongosh --host "{{ MONGODB_HOST }}" </app/db/master-data.js
     when: catalaogue_output.stdout | int < 0
 
-  - name: Make sure catalogue service unit is running
+  - name: daemon reload
     ansible.builtin.systemd_service:
-      state: restarted
-      name: catalogue
+      daemon_reload: true
 
   - name: Start service catalogue, if not started
     ansible.builtin.service:
