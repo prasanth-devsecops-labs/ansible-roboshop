@@ -21,7 +21,7 @@
       image_id: "{{ ami_id }}"
       security_group: "{{ sg_id }}"
       # region: us-east-1
-      wait: false
+      # wait: false
       tags:
         Project: roboshop
         Component: "{{ item }}"
@@ -47,6 +47,7 @@
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"     
       wait: false
+      overwrite: true
     loop: "{{ ec2_output.results }}"
     when: actions == "create"
 
@@ -59,6 +60,7 @@
       ttl: 1
       value: "{{ item.instances[0].public_ip_address }}"     
       wait: false
+      overwrite: true
     loop: "{{ ec2_output.results }}"
     when: 
     - item.item == "frontend"
