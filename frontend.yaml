@@ -1,6 +1,5 @@
 - name: configure frontend server
   hosts: frontend
-  connection: local
   become: yes
   tasks:
   - name: enable nginx 1.24
