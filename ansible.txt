@@ -1,0 +1,22 @@
+TODO: Prasanth.
+
+Typo mistakes and Syntax mistakes
+connection: local # not required
+become: yes # Required.
+
+validation has to be done even for the values which are coming from commandline
+ex: shippping not correct word, but every where we might already defined shipping correct way.
+so server names and dns record names and all places has to be same.
+
+frontend public record has to deleted in destroy call
+
+become: yes how handling in roles concept need to check??
+
+inventory.ini  and group_vars, check which one to use in roles concpets??
+
+component all at a time can we pass? if so how?
+
+changed_when  ??  to achieve idempotency  when shell and command is using?
+failed_when  
+
+
