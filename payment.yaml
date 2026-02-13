@@ -1,6 +1,7 @@
 - name: configure payment server
   hosts: payment
   connection: local
+  become: yes
   tasks:
   - name: install python dependencies
     ansible.builtin.dnf:
