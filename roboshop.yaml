@@ -1,13 +1,4 @@
 # ansible-playbook -i localhost,   -e '{"instances":["mongodb","catalogue","redis","user","cart","mysql","shipping","rabbitmq","payment","frontend"]}'  -e action=destroy roboshop.yaml
-
-- name: install python dependencies
-  ansible.builtin.pip:
-    name: "{{ item }}"
-    execitable: pip3.9
-  loop:
-  - botocore
-  - boto3
-
 - name: create ec2 and r53 records
   hosts: all
   connection: local
@@ -22,6 +13,14 @@
     - catalogue
   
   tasks:
+  - name: install python dependencies
+    ansible.builtin.pip:
+      name: "{{ item }}"
+      execitable: pip3.9
+    loop:
+    - botocore
+    - boto3
+
   - name: Create EC2 instance
     amazon.aws.ec2_instance:
       name: "{{ item }}-{{ env }}"
