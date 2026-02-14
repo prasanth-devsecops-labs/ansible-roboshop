@@ -4,7 +4,10 @@
   tasks:
   - name: install python dependencies
     ansible.builtin.dnf:
-      name: python3 gcc python3-devel
+      name:
+        - python3
+        - gcc
+        - python3-devel
       state: present
   
   - name: Create system user
