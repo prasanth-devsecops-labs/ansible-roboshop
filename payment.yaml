@@ -44,7 +44,7 @@
   - name: Install specified python requirements
     ansible.builtin.pip:
       requirements: /requirements.txt
-    chdir: /app
+      chdir: /app
 
   - name: copy payment service
     ansible.builtin.template:
