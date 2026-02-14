@@ -84,6 +84,22 @@
       - app-user 
       - master-data
   
+  #### TEST
+  - name: Verify master data is loaded
+    community.mysql.mysql_query:
+      login_host: "{{ MYSQL_HOST }}"
+      login_user: root
+      login_password: RoboShop@1
+      login_db: cities  
+      query: "SELECT COUNT(*) as count FROM countries"
+    register: db_verify    
+
+  - name: Fail if no data is found
+    ansible.builtin.fail:
+      msg: "Verification failed: No countries found in the database!"
+    when: db_verify.query_result[0][0].count == 0
+  #####
+  
   - name: start endale shipping
     ansible.builtin.service:
       name: shipping
