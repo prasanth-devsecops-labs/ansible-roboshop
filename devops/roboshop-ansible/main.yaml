@@ -1,0 +1,7 @@
+- name: Test Variable precedence
+  hosts: local
+  connection: local
+  vars:
+    name: "I am from PLAY"
+  roles:
+  - demo

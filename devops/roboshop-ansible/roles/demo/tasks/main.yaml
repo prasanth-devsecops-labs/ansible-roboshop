@@ -1,0 +1,13 @@
+- name: Include external variable file
+  ansible.builtin.include_vars:
+    file: "my_vars.yaml"
+
+- name: Dynamically set the name variable
+  ansible.builtin.set_fact:
+    name: "I am from SET_FACT"
+
+- name: print variable value
+  vars:
+    name: "I am from TASK"
+  ansible.builtin.debug:
+    msg: "Hello, Hi {{ name }}"
